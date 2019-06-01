@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
-* Студент: [Михаил Дорошенко](https://up.htmlacademy.ru/javascript/17/user/559237).
-* Наставник: `Неизвестно`.
+* Студент: [Михаил](https://up.htmlacademy.ru/javascript/17/user/559237).
+* Наставник: `Анастасия Шевченко`.
 
 ---
 
