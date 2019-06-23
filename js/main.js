@@ -15,12 +15,12 @@ var mapBlock = document.querySelector('.map');
 mapBlock.classList.remove('map--faded');
 
 var getImages = function () {
-  var avatars = [];
+  var avatarsArray = [];
   for (var i = 1; i <= ARRAY_LENGTH; i++) {
-    var avatarIndex = i;
-    avatars.push('img/avatars/user0' + avatarIndex + '.png');
+    var avatarsArrayIndex = i;
+    avatarsArray.push('img/avatars/user0' + avatarsArrayIndex + '.png');
   }
-  return avatars;
+  return avatarsArray;
 };
 
 var avatars = getImages();
