@@ -25,7 +25,8 @@ var getOffers = function (index) {
       type: OFFERS_TYPES[getRandomNumber(0, OFFERS_TYPES.length)]
     },
     location: {
-      x: getRandomNumber(0, mapWidth), y: getRandomNumber(MIN_Y, MAX_Y)
+      x: getRandomNumber(0, mapWidth),
+      y: getRandomNumber(MIN_Y, MAX_Y)
     },
   };
 };
