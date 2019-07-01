@@ -47,6 +47,7 @@ var createPin = function (pin) {
   var pinElement = pinTemplate.cloneNode(true);
   pinElement.style.left = pin.location.x + PIN_OFFSET_X + 'px';
   pinElement.style.top = pin.location.y + PIN_OFFSET_Y + 'px';
+  
   var avatar = pinElement.querySelector('img');
   avatar.src = pin.author.avatar;
   avatar.alt = 'Personal Avatar';
