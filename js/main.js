@@ -60,6 +60,9 @@ for (var i = 0; i < pins.length; i++) {
 
 mapBlock.appendChild(pinFragment);
 
+
+
+
 // обработчик на метку по click
 var pinMain = document.querySelector('.map__pin--main');
 pinMain.addEventListener('click', function () {
