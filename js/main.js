@@ -58,67 +58,68 @@ for (var i = 0; i < pins.length; i++) {
   pinFragment.appendChild(createPin(pins[i]));
 }
 
-mapBlock.appendChild(pinFragment);
-
-
-
-
-// обработчик на метку по click
-var pinMain = document.querySelector('.map__pin--main');
-pinMain.addEventListener('click', function () {
+var enableForm = function () {
   var formMain = document.querySelector('.ad-form');
   formMain.classList.remove('ad-form--disabled');
+};
 
+var enableMap = function () {
   mapBlock.classList.remove('map--faded');
+};
 
+var enableInput = function () {
   var inputField = document.querySelectorAll('input');
   for (var i = 0; i < inputField.length; i++) {
     inputField[i].disabled = false;
   }
+};
 
+var enableSelect = function () {
   var inputSelect = document.querySelectorAll('select');
   for (var i = 0; i < inputSelect.length; i++) {
     inputSelect[i].disabled = false;
   }
+};
 
+var enableTextField = function () {
   var textField = document.querySelector('textarea');
   textField.disabled = false;
+};
 
+var enableButton = function () {
   var button = document.querySelectorAll('button');
   for (var i = 0; i < button.length; i++) {
     button[i].disabled = false;
   }
+};
+
+// обработчик на метку по click
+var pinMain = document.querySelector('.map__pin--main');
+pinMain.addEventListener('click', function () {
+  enableMap();
+  enableForm();
+  enableInput();
+  enableSelect();
+  enableTextField();
+  enableButton();
+
+  mapBlock.appendChild(pinFragment);
 });
 
 // обработчик на метку по mousedown
 
 pinMain.addEventListener('mousedown', function () {
-  var formMain = document.querySelector('.ad-form');
-  formMain.classList.remove('ad-form--disabled');
-
-  mapBlock.classList.remove('map--faded');
-
-  var inputField = document.querySelectorAll('input');
-  for (var i = 0; i < inputField.length; i++) {
-    inputField[i].disabled = false;
-  }
-
-  var inputSelect = document.querySelectorAll('select');
-  for (var i = 0; i < inputSelect.length; i++) {
-    inputSelect[i].disabled = false;
-  }
-
-  var textField = document.querySelector('textarea');
-  textField.disabled = false;
-
-  var button = document.querySelectorAll('button');
-  for (var i = 0; i < button.length; i++) {
-    button[i].disabled = false;
-  }
+  enableForm();
+  enableMap();
+  enableInput();
+  enableSelect();
+  enableTextField();
+  enableButton();
 
   var addressField = document.querySelector('#address');
+  var bodyRect = document.body.getBoundingClientRect();
   var rect = pinMain.getBoundingClientRect();
-  addressField.value = rect.right + ', ' + rect.top;
+  addressField.value = rect.left - bodyRect.left + ', ' + (rect.top - bodyRect.top);
 });
 
 // отключение форм ввода
