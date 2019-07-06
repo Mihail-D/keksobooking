@@ -12,7 +12,7 @@ var getRandomNumber = function (minValue, maxValue) {
 };
 
 var mapBlock = document.querySelector('.map');
-
+var formMain = document.querySelector('.ad-form');
 var mapWidth = document.querySelector('.map__pins').offsetWidth;
 
 var getOffers = function (index) {
@@ -59,7 +59,6 @@ for (var i = 0; i < pins.length; i++) {
 }
 
 var enableForm = function () {
-  var formMain = document.querySelector('.ad-form');
   formMain.classList.remove('ad-form--disabled');
 };
 
@@ -68,28 +67,28 @@ var enableMap = function () {
 };
 
 var enableInput = function () {
-  var inputField = document.querySelectorAll('input');
-  for (var i = 0; i < inputField.length; i++) {
-    inputField[i].disabled = false;
+  var inputFields = formMain.querySelectorAll('input');
+  for (var j = 0; j < inputFields.length; j++) {
+    inputFields[j].disabled = false;
   }
 };
 
 var enableSelect = function () {
-  var inputSelect = document.querySelectorAll('select');
-  for (var i = 0; i < inputSelect.length; i++) {
-    inputSelect[i].disabled = false;
+  var inputSelect = formMain.querySelectorAll('select');
+  for (var k = 0; k < inputSelect.length; k++) {
+    inputSelect[k].disabled = false;
   }
 };
 
 var enableTextField = function () {
-  var textField = document.querySelector('textarea');
+  var textField = formMain.querySelector('textarea');
   textField.disabled = false;
 };
 
 var enableButton = function () {
-  var button = document.querySelectorAll('button');
-  for (var i = 0; i < button.length; i++) {
-    button[i].disabled = false;
+  var button = formMain.querySelectorAll('button');
+  for (var l = 0; l < button.length; l++) {
+    button[l].disabled = false;
   }
 };
 
@@ -116,30 +115,35 @@ pinMain.addEventListener('mousedown', function () {
   enableTextField();
   enableButton();
 
-  var addressField = document.querySelector('#address');
-  var bodyRect = document.body.getBoundingClientRect();
+  var addressField = formMain.querySelector('#address');
+
+  var mapRect = mapBlock.getBoundingClientRect();
   var rect = pinMain.getBoundingClientRect();
-  addressField.value = rect.left - bodyRect.left + ', ' + (rect.top - bodyRect.top);
+  addressField.value = rect.left - mapRect.left + ', ' + (rect.top - mapRect.top);
 });
 
 // отключение форм ввода
 
-var inputField = document.querySelectorAll('input');
-for (var i = 0; i < inputField.length; i++) {
-  inputField[i].disabled = true;
-}
+var disableInputFields = function () {
+  var inputFields = formMain.querySelectorAll('input');
+  for (var x = 0; x < inputFields.length; x++) {
+    inputFields[x].disabled = true;
+  }
 
-var inputSelect = document.querySelectorAll('select');
-for (var i = 0; i < inputSelect.length; i++) {
-  inputSelect[i].disabled = true;
-}
+  var inputSelect = formMain.querySelectorAll('select');
+  for (var y = 0; y < inputSelect.length; y++) {
+    inputSelect[y].disabled = true;
+  }
 
-var textField = document.querySelector('textarea');
-textField.disabled = true;
+  var textField = formMain.querySelector('textarea');
+  textField.disabled = true;
 
-var buttonsBlock = document.querySelector('.ad-form__element--submit');
+  var buttonsBlock = formMain.querySelector('.ad-form__element--submit');
 
-var button = buttonsBlock.querySelectorAll('button');
-for (var i = 0; i < button.length; i++) {
-  button[i].disabled = true;
-}
+  var button = buttonsBlock.querySelectorAll('button');
+  for (var z = 0; z < button.length; z++) {
+    button[z].disabled = true;
+  }
+};
+
+disableInputFields();
