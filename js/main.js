@@ -118,8 +118,8 @@ pinMain.addEventListener('mousedown', function () {
   var addressField = formMain.querySelector('#address');
 
   var mapRect = mapBlock.getBoundingClientRect();
-  var rect = pinMain.getBoundingClientRect();
-  addressField.value = rect.left - mapRect.left + ', ' + (rect.top - mapRect.top);
+  var pinRect = pinMain.getBoundingClientRect();
+  addressField.value = pinRect.left - mapRect.left + ', ' + (pinRect.top - mapRect.top);
 });
 
 // отключение форм ввода
