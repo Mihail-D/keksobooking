@@ -137,7 +137,7 @@ for (var i = 0; i < inputSelect.length; i++) {
 var textField = document.querySelector('textarea');
 textField.disabled = true;
 
-var buttonsBlock = document.querySelector('.ad - form__element');
+var buttonsBlock = document.querySelector('.ad-form__element--submit');
 
 var button = buttonsBlock.querySelectorAll('button');
 for (var i = 0; i < button.length; i++) {
