@@ -69,7 +69,9 @@ var enableMap = function () {
 var enableInput = function () {
   var inputFields = formMain.querySelectorAll('input');
   for (var j = 0; j < inputFields.length; j++) {
-    inputFields[j].disabled = false;
+    if (inputFields[j].name !== 'address') {
+      inputFields[j].disabled = false;
+    }
   }
 };
 
@@ -188,10 +190,23 @@ var checkMinPrice = function () {
   priceInputField.placeholder = priceInputField.min;
 };
 
+
+var checkInTime = formMain.querySelector('#timein');
+var checkOutTime = formMain.querySelector('#timeout');
+
+checkInTime.addEventListener('change', function () {
+  checkOutTime.value = checkInTime.value;
+});
+checkOutTime.addEventListener('change', function () {
+  checkInTime.value = checkOutTime.value;
+});
+
+
 housingInputField.addEventListener('click', function () {
   checkMinPrice();
 });
 
-
-
-checkNonValidData();
+var buttonSubmit = formMain.querySelector('.ad-form__submit');
+buttonSubmit.addEventListener('click', function () {
+  checkNonValidData();
+});
