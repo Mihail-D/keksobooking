@@ -10,7 +10,3 @@ node_modules/
 npm-debug.log*
 Thumbs.db
 .vscode/
-.gitignore
-package.json
-package-lock.json
-gulpfile.js
