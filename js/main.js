@@ -190,7 +190,6 @@ var checkMinPrice = function () {
   priceInputField.placeholder = priceInputField.min;
 };
 
-
 var checkInTime = formMain.querySelector('#timein');
 var checkOutTime = formMain.querySelector('#timeout');
 
@@ -200,7 +199,6 @@ checkInTime.addEventListener('change', function () {
 checkOutTime.addEventListener('change', function () {
   checkInTime.value = checkOutTime.value;
 });
-
 
 housingInputField.addEventListener('click', function () {
   checkMinPrice();
