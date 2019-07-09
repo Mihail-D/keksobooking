@@ -147,3 +147,51 @@ var disableInputFields = function () {
 };
 
 disableInputFields();
+
+// Валидация форм
+var checkNonValidData = function () {
+  var inputNonValid = formMain.querySelectorAll('input');
+  for (var j = 0; j < inputNonValid.length; j++) {
+    if (!inputNonValid[j].valid && inputNonValid[j].hasAttribute('required')) {
+      inputNonValid[j].style.backgroundColor = '#ffe9ec';
+    }
+  }
+};
+
+var titleInputField = formMain.querySelector('#title');
+var priceInputField = formMain.querySelector('#price');
+var housingInputField = formMain.querySelector('#type');
+
+titleInputField.addEventListener('invalid', function () {
+  if (titleInputField.validity.tooShort) {
+    titleInputField.setCustomValidity('30 символов - минимальная длина заголовка.');
+  } else if (titleInputField.validity.tooLong) {
+    titleInputField.setCustomValidity('100 символов - максимальная длина заголовка.');
+  } else if (titleInputField.validity.patternMismatch) {
+    titleInputField.setCustomValidity('Только латинские и кириллические симыолы  допустимы для заголовка.');
+  } else {
+    titleInputField.setCustomValidity('');
+  }
+});
+
+var checkMinPrice = function () {
+  var optionPosition = housingInputField.options[housingInputField.selectedIndex].text;
+  if (optionPosition === 'Бунгало') {
+    priceInputField.min = 0;
+  } else if (optionPosition === 'Квартира') {
+    priceInputField.min = 1000;
+  } else if (optionPosition === 'Дом') {
+    priceInputField.min = 5000;
+  } else if (optionPosition === 'Дворец') {
+    priceInputField.min = 10000;
+  }
+  priceInputField.placeholder = priceInputField.min;
+};
+
+housingInputField.addEventListener('click', function () {
+  checkMinPrice();
+});
+
+
+
+checkNonValidData();
