@@ -6,6 +6,12 @@ var PIN_OFFSET_X = -20;
 var PIN_OFFSET_Y = -65;
 
 var OFFERS_TYPES = ['palace', 'flat', 'house ', 'bungalo'];
+var accomodationType = {
+  BUNGALO: 0,
+  FLAT: 1000,
+  HOUSE: 5000,
+  PALACE: 10000,
+};
 
 var getRandomNumber = function (minValue, maxValue) {
   return Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
@@ -151,44 +157,30 @@ var disableInputFields = function () {
 disableInputFields();
 
 // Валидация форм
-var checkNonValidData = function () {
-  var inputNonValid = formMain.querySelectorAll('input');
-  for (var j = 0; j < inputNonValid.length; j++) {
-    if (!inputNonValid[j].valid && inputNonValid[j].hasAttribute('required')) {
-      inputNonValid[j].style.backgroundColor = '#ffe9ec';
+var checkInvalidData = function () {
+  var inputInValid = formMain.querySelectorAll('input');
+  for (var j = 0; j < inputInValid.length; j++) {
+    if (!inputInValid[j].valid && inputInValid[j].hasAttribute('required')) {
+      inputInValid[j].style.backgroundColor = '#ffe9ec';
     }
   }
 };
 
-var titleInputField = formMain.querySelector('#title');
-var priceInputField = formMain.querySelector('#price');
-var housingInputField = formMain.querySelector('#type');
+var titleInput = formMain.querySelector('#title');
+var priceInput = formMain.querySelector('#price');
+var houseTypeSelect = formMain.querySelector('#type');
 
-titleInputField.addEventListener('invalid', function () {
-  if (titleInputField.validity.tooShort) {
-    titleInputField.setCustomValidity('30 символов - минимальная длина заголовка.');
-  } else if (titleInputField.validity.tooLong) {
-    titleInputField.setCustomValidity('100 символов - максимальная длина заголовка.');
-  } else if (titleInputField.validity.patternMismatch) {
-    titleInputField.setCustomValidity('Только латинские и кириллические симыолы  допустимы для заголовка.');
-  } else {
-    titleInputField.setCustomValidity('');
+titleInput.addEventListener('invalid', function () {
+  var validityMessage = '';
+  if (titleInput.validity.tooShort) {
+    validityMessage = '30 символов - минимальная длина заголовка.';
+  } else if (titleInput.validity.tooLong) {
+    validityMessage = '100 символов - максимальная длина заголовка.';
+  } else if (titleInput.validity.patternMismatch) {
+    validityMessage = 'Только латинские и кириллические символы  допустимы для заголовка.';
   }
+  titleInput.setCustomValidity(validityMessage);
 });
-
-var checkMinPrice = function () {
-  var optionPosition = housingInputField.options[housingInputField.selectedIndex].text;
-  if (optionPosition === 'Бунгало') {
-    priceInputField.min = 0;
-  } else if (optionPosition === 'Квартира') {
-    priceInputField.min = 1000;
-  } else if (optionPosition === 'Дом') {
-    priceInputField.min = 5000;
-  } else if (optionPosition === 'Дворец') {
-    priceInputField.min = 10000;
-  }
-  priceInputField.placeholder = priceInputField.min;
-};
 
 var checkInTime = formMain.querySelector('#timein');
 var checkOutTime = formMain.querySelector('#timeout');
@@ -200,11 +192,12 @@ checkOutTime.addEventListener('change', function () {
   checkInTime.value = checkOutTime.value;
 });
 
-housingInputField.addEventListener('click', function () {
-  checkMinPrice();
+houseTypeSelect.addEventListener('change', function () {
+  priceInput.min = accomodationType[houseTypeSelect.value.toUpperCase()];
+  priceInput.placeholder = accomodationType[houseTypeSelect.value.toUpperCase()];
 });
 
 var buttonSubmit = formMain.querySelector('.ad-form__submit');
 buttonSubmit.addEventListener('click', function () {
-  checkNonValidData();
+  checkInvalidData();
 });
