@@ -161,7 +161,7 @@ var checkInvalidData = function () {
   var inputInValid = formMain.querySelectorAll('input');
   for (var j = 0; j < inputInValid.length; j++) {
     if (!inputInValid[j].valid && inputInValid[j].hasAttribute('required')) {
-      inputInValid[j].style.backgroundColor = '#ffe9ec';
+      inputInValid[j].classList.add('ad-form__element--error');
     }
   }
 };
@@ -169,6 +169,18 @@ var checkInvalidData = function () {
 var titleInput = formMain.querySelector('#title');
 var priceInput = formMain.querySelector('#price');
 var houseTypeSelect = formMain.querySelector('#type');
+
+titleInput.addEventListener('keyup', function () {
+  if (!titleInput.valid) {
+    titleInput.classList.add('ad-form__element--error');
+  }
+});
+
+priceInput.addEventListener('keyup', function () {
+  if (!priceInput.valid) {
+    priceInput.classList.add('ad-form__element--error');
+  }
+});
 
 titleInput.addEventListener('invalid', function () {
   var validityMessage = '';
