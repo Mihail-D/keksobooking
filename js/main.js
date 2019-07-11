@@ -189,7 +189,7 @@ titleInput.addEventListener('invalid', function () {
   } else if (titleInput.validity.tooLong) {
     validityMessage = '100 символов - максимальная длина заголовка.';
   } else if (titleInput.validity.patternMismatch) {
-    validityMessage = 'Только латинские и кириллические символы  допустимы для заголовка.';
+    validityMessage = 'Цифры и специальные символы ограничены к применению.';
   }
   titleInput.setCustomValidity(validityMessage);
 });
