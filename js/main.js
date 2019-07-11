@@ -75,9 +75,7 @@ var enableMap = function () {
 var enableInput = function () {
   var inputFields = formMain.querySelectorAll('input');
   for (var j = 0; j < inputFields.length; j++) {
-    if (inputFields[j].name !== 'address') {
-      inputFields[j].disabled = false;
-    }
+    inputFields[j].disabled = false;
   }
 };
 
