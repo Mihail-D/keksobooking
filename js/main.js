@@ -98,24 +98,17 @@ var enableButton = function () {
   }
 };
 
+// ====================================================================================================
+// ====================================================================================================
+// ====================================================================================================
+// ====================================================================================================
+
 // обработчик на метку по click
 var pinMain = document.querySelector('.map__pin--main');
-pinMain.addEventListener('click', function () {
+
+var getPageElements = function () {
   enableMap();
   enableForm();
-  enableInput();
-  enableSelect();
-  enableTextField();
-  enableButton();
-
-  mapBlock.appendChild(pinFragment);
-});
-
-// обработчик на метку по mousedown
-
-pinMain.addEventListener('mousedown', function () {
-  enableForm();
-  enableMap();
   enableInput();
   enableSelect();
   enableTextField();
@@ -126,7 +119,65 @@ pinMain.addEventListener('mousedown', function () {
   var mapRect = mapBlock.getBoundingClientRect();
   var pinRect = pinMain.getBoundingClientRect();
   addressField.value = pinRect.left - mapRect.left + ', ' + (pinRect.top - mapRect.top);
-});
+
+  mapBlock.appendChild(pinFragment);
+};
+
+// обработчик на метку по mousedown
+
+(function () {
+  pinMain.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
+
+    var startCoords = {
+      x: evt.clientX,
+      y: evt.clientY,
+    };
+
+    var dragged = false;
+
+    var onMouseMove = function (moveEvt) {
+      moveEvt.preventDefault();
+      dragged = true;
+
+      var shift = {
+        x: startCoords.x - moveEvt.clientX,
+        y: startCoords.y - moveEvt.clientY,
+      };
+
+      startCoords = {
+        x: moveEvt.clientX,
+        y: moveEvt.clientY,
+      };
+
+      pinMain.style.top = pinMain.offsetTop - shift.y + 'px';
+      pinMain.style.left = pinMain.offsetLeft - shift.x + 'px';
+    };
+
+    var onMouseUp = function (upEvt) {
+      upEvt.preventDefault();
+      getPageElements();
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+
+      if (dragged) {
+        var onClickPreventDefault = function (dragEvt) {
+          dragEvt.preventDefault();
+          pinMain.removeEventListener('click', onClickPreventDefault);
+        };
+        pinMain.addEventListener('click', onClickPreventDefault);
+      }
+    };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  });
+})();
+
+// ====================================================================================================
+// ====================================================================================================
+// ====================================================================================================
+// ====================================================================================================
 
 // отключение форм ввода
 
