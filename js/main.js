@@ -2,8 +2,8 @@
 var MIN_Y = 130;
 var MAX_Y = 630;
 var OFFERS_COUNT = 8;
-var PIN_OFFSET_X = -20;
-var PIN_OFFSET_Y = -65;
+var PIN_OFFSET_X = -31;
+var PIN_OFFSET_Y = -75;
 
 var OFFERS_TYPES = ['palace', 'flat', 'house ', 'bungalo'];
 var accomodationType = {
@@ -98,12 +98,6 @@ var enableButton = function () {
   }
 };
 
-// ====================================================================================================
-// ====================================================================================================
-// ====================================================================================================
-// ====================================================================================================
-
-// обработчик на метку по click
 var pinMain = document.querySelector('.map__pin--main');
 
 var getPageElements = function () {
@@ -150,8 +144,21 @@ var getPageElements = function () {
         y: moveEvt.clientY,
       };
 
-      pinMain.style.top = pinMain.offsetTop - shift.y + 'px';
-      pinMain.style.left = pinMain.offsetLeft - shift.x + 'px';
+      if (pinMain.offsetTop - shift.y < MIN_Y) {
+        pinMain.style.top = MIN_Y + 'px';
+      } else if (pinMain.offsetTop - shift.y > MAX_Y) {
+        pinMain.style.top = MAX_Y + 'px';
+      } else {
+        pinMain.style.top = pinMain.offsetTop - shift.y + 'px';
+      }
+
+      if (pinMain.offsetLeft - shift.x < 0) {
+        pinMain.style.left = 0 + 'px';
+      } else if (pinMain.offsetLeft - shift.x > 1135) {
+        pinMain.style.left = 1135 + 'px';
+      } else {
+        pinMain.style.left = pinMain.offsetLeft - shift.x + 'px';
+      }
     };
 
     var onMouseUp = function (upEvt) {
@@ -173,11 +180,6 @@ var getPageElements = function () {
     document.addEventListener('mouseup', onMouseUp);
   });
 })();
-
-// ====================================================================================================
-// ====================================================================================================
-// ====================================================================================================
-// ====================================================================================================
 
 // отключение форм ввода
 
