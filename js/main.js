@@ -2,7 +2,7 @@
 var MIN_Y = 130;
 var MAX_Y = 630;
 var OFFERS_COUNT = 8;
-var PIN_OFFSET_X = -75;
+var PIN_OFFSET_X = -61;
 var PIN_OFFSET_Y = -75;
 
 var OFFERS_TYPES = ['palace', 'flat', 'house ', 'bungalo'];
@@ -154,7 +154,7 @@ var getPageElements = function () {
 
       if (pinMain.offsetLeft - shift.x < 0) {
         pinMain.style.left = 0 + 'px';
-      } else if (pinMain.offsetLeft - shift.x > mapWidth) {
+      } else if (pinMain.offsetLeft - shift.x > mapWidth + PIN_OFFSET_X) {
         pinMain.style.left = mapWidth + PIN_OFFSET_X + 'px';
       } else {
         pinMain.style.left = pinMain.offsetLeft - shift.x + 'px';
