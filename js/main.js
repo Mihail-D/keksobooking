@@ -155,7 +155,7 @@ var getPageElements = function () {
       if (pinMain.offsetLeft - shift.x < 0) {
         pinMain.style.left = 0 + 'px';
       } else if (pinMain.offsetLeft - shift.x > mapWidth) {
-        pinMain.style.left = (mapWidth + PIN_OFFSET_X) + 'px';
+        pinMain.style.left = mapWidth + PIN_OFFSET_X + 'px';
       } else {
         pinMain.style.left = pinMain.offsetLeft - shift.x + 'px';
       }
