@@ -1,4 +1,5 @@
 'use strict';
+
 (function () {
   window.MIN_Y = 130;
   window.PIN_OFFSET_X = -61;

@@ -1,4 +1,5 @@
 'use strict';
+
 (function () {
   var accomodationType = {
     BUNGALO: 0,
