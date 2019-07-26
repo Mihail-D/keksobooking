@@ -112,66 +112,91 @@ var getPageElements = function () {
   mapBlock.appendChild(pinFragment);
 };
 
-// обработчик на метку по mousedown
 
-(function () {
-  pinMain.addEventListener('mousedown', function (evt) {
-    evt.preventDefault();
+var accomodationType = {
+  BUNGALO: 0,
+  FLAT: 1000,
+  HOUSE: 5000,
+  PALACE: 10000,
+};
 
-    var startCoords = {
-      x: evt.clientX,
-      y: evt.clientY,
-    };
+var disableInputFields = function () {
+  var inputFields = formMain.querySelectorAll('input');
+  for (var x = 0; x < inputFields.length; x++) {
+    inputFields[x].disabled = true;
+  }
 
-    var dragged = false;
+  var inputSelect = formMain.querySelectorAll('select');
+  for (var y = 0; y < inputSelect.length; y++) {
+    inputSelect[y].disabled = true;
+  }
 
-    var onMouseMove = function (moveEvt) {
-      moveEvt.preventDefault();
-      dragged = true;
+  var textField = formMain.querySelector('textarea');
+  textField.disabled = true;
 
-      var shift = {
-        x: startCoords.x - moveEvt.clientX,
-        y: startCoords.y - moveEvt.clientY,
-      };
+  var buttonsBlock = formMain.querySelector('.ad-form__element--submit');
 
-      startCoords = {
-        x: moveEvt.clientX,
-        y: moveEvt.clientY,
-      };
+  var button = buttonsBlock.querySelectorAll('button');
+  for (var z = 0; z < button.length; z++) {
+    button[z].disabled = true;
+  }
+};
 
-      if (pinMain.offsetTop - shift.y < MIN_Y) {
-        pinMain.style.top = MIN_Y + 'px';
-      } else if (pinMain.offsetTop - shift.y > MAX_Y) {
-        pinMain.style.top = MAX_Y + 'px';
-      } else {
-        pinMain.style.top = pinMain.offsetTop - shift.y + 'px';
-      }
+disableInputFields();
 
-      if (pinMain.offsetLeft - shift.x < 0) {
-        pinMain.style.left = 0 + 'px';
-      } else if (pinMain.offsetLeft - shift.x > mapWidth + PIN_OFFSET_X) {
-        pinMain.style.left = mapWidth + PIN_OFFSET_X + 'px';
-      } else {
-        pinMain.style.left = pinMain.offsetLeft - shift.x + 'px';
-      }
-    };
+var checkInvalidData = function () {
+  var inputInValid = formMain.querySelectorAll('input');
+  for (var j = 0; j < inputInValid.length; j++) {
+    if (!inputInValid[j].valid && inputInValid[j].hasAttribute('required')) {
+      inputInValid[j].classList.add('ad-form__element--error');
+    }
+  }
+};
 
-    var onMouseUp = function (upEvt) {
-      upEvt.preventDefault();
-      getPageElements();
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
+var titleInput = formMain.querySelector('#title');
+var priceInput = formMain.querySelector('#price');
+var houseTypeSelect = formMain.querySelector('#type');
 
-      if (dragged) {
-        var onClickPreventDefault = function (dragEvt) {
-          dragEvt.preventDefault();
-          pinMain.removeEventListener('click', onClickPreventDefault);
-        };
-        pinMain.addEventListener('click', onClickPreventDefault);
-      }
-    };
+titleInput.addEventListener('keyup', function () {
+  if (!titleInput.valid) {
+    titleInput.classList.add('ad-form__element--error');
+  }
+});
 
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-  });
-})();
+priceInput.addEventListener('keyup', function () {
+  if (!priceInput.valid) {
+    priceInput.classList.add('ad-form__element--error');
+  }
+});
+
+titleInput.addEventListener('invalid', function () {
+  var validityMessage = '';
+  if (titleInput.validity.tooShort) {
+    validityMessage = '30 символов - минимальная длина заголовка.';
+  } else if (titleInput.validity.tooLong) {
+    validityMessage = '100 символов - максимальная длина заголовка.';
+  } else if (titleInput.validity.patternMismatch) {
+    validityMessage = 'Цифры и специальные символы ограничены к применению.';
+  }
+  titleInput.setCustomValidity(validityMessage);
+});
+
+var checkInTime = formMain.querySelector('#timein');
+var checkOutTime = formMain.querySelector('#timeout');
+
+checkInTime.addEventListener('change', function () {
+  checkOutTime.value = checkInTime.value;
+});
+checkOutTime.addEventListener('change', function () {
+  checkInTime.value = checkOutTime.value;
+});
+
+houseTypeSelect.addEventListener('change', function () {
+  priceInput.min = accomodationType[houseTypeSelect.value.toUpperCase()];
+  priceInput.placeholder = accomodationType[houseTypeSelect.value.toUpperCase()];
+});
+
+var buttonSubmit = formMain.querySelector('.ad-form__submit');
+buttonSubmit.addEventListener('click', function () {
+  checkInvalidData();
+});
