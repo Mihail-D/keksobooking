@@ -46,7 +46,7 @@
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
 
-      window.getPageElements();
+      window.form.getPageElements();
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
 
