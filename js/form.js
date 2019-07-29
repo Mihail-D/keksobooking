@@ -45,7 +45,7 @@
     }
   };
 
-  window.pinMain = document.querySelector('.map__pin--main');
+  var pinMain = document.querySelector('.map__pin--main');
 
   window.getPageElements = function () {
     enableMap();
@@ -58,7 +58,7 @@
     var addressField = formMain.querySelector('#address');
 
     var mapRect = mapBlock.getBoundingClientRect();
-    var pinRect = window.pinMain.getBoundingClientRect();
+    var pinRect = pinMain.getBoundingClientRect();
     addressField.value = pinRect.left - mapRect.left + ', ' + (pinRect.top - mapRect.top);
 
     mapBlock.appendChild(window.form.pinFragment);

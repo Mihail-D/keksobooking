@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-  window.pinMain.addEventListener('mousedown', function (evt) {
+  var pinMain = document.querySelector('.map__pin--main');
+  pinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
     var mapWidth = document.querySelector('.map__pins').offsetWidth;
     var startCoords = {
@@ -25,20 +26,20 @@
         y: moveEvt.clientY,
       };
 
-      if (window.pinMain.offsetTop - shift.y < window.form.MIN_Y) {
-        window.pinMain.style.top = window.form.MIN_Y + 'px';
-      } else if (window.pinMain.offsetTop - shift.y > window.form.MAX_Y) {
-        window.pinMain.style.top = window.form.MAX_Y + 'px';
+      if (pinMain.offsetTop - shift.y < window.form.MIN_Y) {
+        pinMain.style.top = window.form.MIN_Y + 'px';
+      } else if (pinMain.offsetTop - shift.y > window.form.MAX_Y) {
+        pinMain.style.top = window.form.MAX_Y + 'px';
       } else {
-        window.pinMain.style.top = window.pinMain.offsetTop - shift.y + 'px';
+        pinMain.style.top = pinMain.offsetTop - shift.y + 'px';
       }
 
-      if (window.pinMain.offsetLeft - shift.x < 0) {
-        window.pinMain.style.left = 0 + 'px';
-      } else if (window.pinMain.offsetLeft - shift.x > mapWidth + window.form.PIN_OFFSET_X) {
-        window.pinMain.style.left = mapWidth + window.form.PIN_OFFSET_X + 'px';
+      if (pinMain.offsetLeft - shift.x < 0) {
+        pinMain.style.left = 0 + 'px';
+      } else if (pinMain.offsetLeft - shift.x > mapWidth + window.form.PIN_OFFSET_X) {
+        pinMain.style.left = mapWidth + window.form.PIN_OFFSET_X + 'px';
       } else {
-        window.pinMain.style.left = window.pinMain.offsetLeft - shift.x + 'px';
+        pinMain.style.left = pinMain.offsetLeft - shift.x + 'px';
       }
     };
 
@@ -52,9 +53,9 @@
       if (dragged) {
         var onClickPreventDefault = function (dragEvt) {
           dragEvt.preventDefault();
-          window.pinMain.removeEventListener('click', onClickPreventDefault);
+          pinMain.removeEventListener('click', onClickPreventDefault);
         };
-        window.pinMain.addEventListener('click', onClickPreventDefault);
+        pinMain.addEventListener('click', onClickPreventDefault);
       }
     };
 
