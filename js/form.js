@@ -4,40 +4,40 @@
   window.MIN_Y = 130;
   window.PIN_OFFSET_X = -61;
   window.MAX_Y = 630;
-  window.formMain = document.querySelector('.ad-form');
-  window.mapWidth = document.querySelector('.map__pins').offsetWidth;
-  window.mapBlock = document.querySelector('.map');
   window.pinFragment = document.createDocumentFragment();
 
+  var formMain = document.querySelector('.ad-form');
+  var mapBlock = document.querySelector('.map');
+
   var enableForm = function () {
-    window.formMain.classList.remove('ad-form--disabled');
+    formMain.classList.remove('ad-form--disabled');
   };
 
   var enableMap = function () {
-    window.mapBlock.classList.remove('map--faded');
+    mapBlock.classList.remove('map--faded');
   };
 
   var enableInput = function () {
-    var inputFields = window.formMain.querySelectorAll('input');
+    var inputFields = formMain.querySelectorAll('input');
     for (var j = 0; j < inputFields.length; j++) {
       inputFields[j].disabled = false;
     }
   };
 
   var enableSelect = function () {
-    var inputSelect = window.formMain.querySelectorAll('select');
+    var inputSelect = formMain.querySelectorAll('select');
     for (var k = 0; k < inputSelect.length; k++) {
       inputSelect[k].disabled = false;
     }
   };
 
   var enableTextField = function () {
-    var textField = window.formMain.querySelector('textarea');
+    var textField = formMain.querySelector('textarea');
     textField.disabled = false;
   };
 
   var enableButton = function () {
-    var button = window.formMain.querySelectorAll('button');
+    var button = formMain.querySelectorAll('button');
     for (var l = 0; l < button.length; l++) {
       button[l].disabled = false;
     }
@@ -53,30 +53,30 @@
     enableTextField();
     enableButton();
 
-    var addressField = window.formMain.querySelector('#address');
+    var addressField = formMain.querySelector('#address');
 
-    var mapRect = window.mapBlock.getBoundingClientRect();
+    var mapRect = mapBlock.getBoundingClientRect();
     var pinRect = window.pinMain.getBoundingClientRect();
     addressField.value = pinRect.left - mapRect.left + ', ' + (pinRect.top - mapRect.top);
 
-    window.mapBlock.appendChild(window.pinFragment);
+    mapBlock.appendChild(window.pinFragment);
   };
 
   var disableInputFields = function () {
-    var inputFields = window.formMain.querySelectorAll('input');
+    var inputFields = formMain.querySelectorAll('input');
     for (var x = 0; x < inputFields.length; x++) {
       inputFields[x].disabled = true;
     }
 
-    var inputSelect = window.formMain.querySelectorAll('select');
+    var inputSelect = formMain.querySelectorAll('select');
     for (var y = 0; y < inputSelect.length; y++) {
       inputSelect[y].disabled = true;
     }
 
-    var textField = window.formMain.querySelector('textarea');
+    var textField = formMain.querySelector('textarea');
     textField.disabled = true;
 
-    var buttonsBlock = window.formMain.querySelector('.ad-form__element--submit');
+    var buttonsBlock = formMain.querySelector('.ad-form__element--submit');
 
     var button = buttonsBlock.querySelectorAll('button');
     for (var z = 0; z < button.length; z++) {
@@ -88,6 +88,7 @@
 })();
 
 (function () {
+  var formMain = document.querySelector('.ad-form');
   var accomodationType = {
     BUNGALO: 0,
     FLAT: 1000,
@@ -96,7 +97,7 @@
   };
 
   var checkInvalidData = function () {
-    var inputInValid = window.formMain.querySelectorAll('input');
+    var inputInValid = formMain.querySelectorAll('input');
     for (var j = 0; j < inputInValid.length; j++) {
       if (!inputInValid[j].valid && inputInValid[j].hasAttribute('required')) {
         inputInValid[j].classList.add('ad-form__element--error');
@@ -104,9 +105,9 @@
     }
   };
 
-  var titleInput = window.formMain.querySelector('#title');
-  var priceInput = window.formMain.querySelector('#price');
-  var houseTypeSelect = window.formMain.querySelector('#type');
+  var titleInput = formMain.querySelector('#title');
+  var priceInput = formMain.querySelector('#price');
+  var houseTypeSelect = formMain.querySelector('#type');
 
   titleInput.addEventListener('keyup', function () {
     if (!titleInput.valid) {
@@ -132,8 +133,8 @@
     titleInput.setCustomValidity(validityMessage);
   });
 
-  var checkInTime = window.formMain.querySelector('#timein');
-  var checkOutTime = window.formMain.querySelector('#timeout');
+  var checkInTime = formMain.querySelector('#timein');
+  var checkOutTime = formMain.querySelector('#timeout');
 
   checkInTime.addEventListener('change', function () {
     checkOutTime.value = checkInTime.value;
@@ -147,7 +148,7 @@
     priceInput.placeholder = accomodationType[houseTypeSelect.value.toUpperCase()];
   });
 
-  var buttonSubmit = window.formMain.querySelector('.ad-form__submit');
+  var buttonSubmit = formMain.querySelector('.ad-form__submit');
   buttonSubmit.addEventListener('click', function () {
     checkInvalidData();
   });

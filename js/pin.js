@@ -4,7 +4,7 @@
   var OFFERS_COUNT = 8;
   var PIN_OFFSET_Y = -75;
   var OFFERS_TYPES = ['palace', 'flat', 'house ', 'bungalo'];
-
+  var mapWidth = document.querySelector('.map__pins').offsetWidth;
   var getRandomNumber = function (minValue, maxValue) {
     return Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
   };
@@ -18,7 +18,7 @@
         type: OFFERS_TYPES[getRandomNumber(0, OFFERS_TYPES.length)],
       },
       location: {
-        x: getRandomNumber(0, window.mapWidth),
+        x: getRandomNumber(0, mapWidth),
         y: getRandomNumber(window.MIN_Y, window.MAX_Y),
       },
     };

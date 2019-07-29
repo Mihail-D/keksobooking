@@ -3,7 +3,7 @@
 (function () {
   window.pinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
-
+    var mapWidth = document.querySelector('.map__pins').offsetWidth;
     var startCoords = {
       x: evt.clientX,
       y: evt.clientY,
@@ -35,8 +35,8 @@
 
       if (window.pinMain.offsetLeft - shift.x < 0) {
         window.pinMain.style.left = 0 + 'px';
-      } else if (window.pinMain.offsetLeft - shift.x > window.mapWidth + window.PIN_OFFSET_X) {
-        window.pinMain.style.left = window.mapWidth + window.PIN_OFFSET_X + 'px';
+      } else if (window.pinMain.offsetLeft - shift.x > mapWidth + window.PIN_OFFSET_X) {
+        window.pinMain.style.left = mapWidth + window.PIN_OFFSET_X + 'px';
       } else {
         window.pinMain.style.left = window.pinMain.offsetLeft - shift.x + 'px';
       }
