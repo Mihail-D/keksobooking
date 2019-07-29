@@ -19,7 +19,7 @@
       },
       location: {
         x: getRandomNumber(0, mapWidth),
-        y: getRandomNumber(window.MIN_Y, window.MAX_Y),
+        y: getRandomNumber(window.form.MIN_Y, window.form.MAX_Y),
       },
     };
   };
@@ -38,7 +38,7 @@
 
   var createPin = function (pin) {
     var pinElement = pinTemplate.cloneNode(true);
-    pinElement.style.left = pin.location.x + window.PIN_OFFSET_X + 'px';
+    pinElement.style.left = pin.location.x + window.form.PIN_OFFSET_X + 'px';
     pinElement.style.top = pin.location.y + PIN_OFFSET_Y + 'px';
 
     var avatar = pinElement.querySelector('img');
@@ -48,6 +48,6 @@
   };
 
   for (var i = 0; i < pins.length; i++) {
-    window.pinFragment.appendChild(createPin(pins[i]));
+    window.form.pinFragment.appendChild(createPin(pins[i]));
   }
 })();

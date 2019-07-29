@@ -1,10 +1,12 @@
 'use strict';
 
 (function () {
-  window.MIN_Y = 130;
-  window.PIN_OFFSET_X = -61;
-  window.MAX_Y = 630;
-  window.pinFragment = document.createDocumentFragment();
+  window.form = {
+    MIN_Y: 130,
+    PIN_OFFSET_X: -61,
+    MAX_Y: 630,
+    pinFragment: document.createDocumentFragment(),
+  };
 
   var formMain = document.querySelector('.ad-form');
   var mapBlock = document.querySelector('.map');
@@ -59,7 +61,7 @@
     var pinRect = window.pinMain.getBoundingClientRect();
     addressField.value = pinRect.left - mapRect.left + ', ' + (pinRect.top - mapRect.top);
 
-    mapBlock.appendChild(window.pinFragment);
+    mapBlock.appendChild(window.form.pinFragment);
   };
 
   var disableInputFields = function () {

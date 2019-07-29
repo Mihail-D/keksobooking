@@ -25,18 +25,18 @@
         y: moveEvt.clientY,
       };
 
-      if (window.pinMain.offsetTop - shift.y < window.MIN_Y) {
-        window.pinMain.style.top = window.MIN_Y + 'px';
-      } else if (window.pinMain.offsetTop - shift.y > window.MAX_Y) {
-        window.pinMain.style.top = window.MAX_Y + 'px';
+      if (window.pinMain.offsetTop - shift.y < window.form.MIN_Y) {
+        window.pinMain.style.top = window.form.MIN_Y + 'px';
+      } else if (window.pinMain.offsetTop - shift.y > window.form.MAX_Y) {
+        window.pinMain.style.top = window.form.MAX_Y + 'px';
       } else {
         window.pinMain.style.top = window.pinMain.offsetTop - shift.y + 'px';
       }
 
       if (window.pinMain.offsetLeft - shift.x < 0) {
         window.pinMain.style.left = 0 + 'px';
-      } else if (window.pinMain.offsetLeft - shift.x > mapWidth + window.PIN_OFFSET_X) {
-        window.pinMain.style.left = mapWidth + window.PIN_OFFSET_X + 'px';
+      } else if (window.pinMain.offsetLeft - shift.x > mapWidth + window.form.PIN_OFFSET_X) {
+        window.pinMain.style.left = mapWidth + window.form.PIN_OFFSET_X + 'px';
       } else {
         window.pinMain.style.left = window.pinMain.offsetLeft - shift.x + 'px';
       }
